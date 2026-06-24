@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentimentBot Cámara</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">IA de análisis emocional</p>
+                <h1>SentimentBot con cámara</h1>
+                <p class="description">
+                    Activa la cámara y el sistema detectará hasta 2 rostros con recuadros de color.
+                    Después puedes capturar la imagen para estimar la emoción facial de cada persona.
+                    El resultado es una aproximación visual, no un diagnóstico psicológico.
+                </p>
+            </div>
+        </section>
+
+        <section class="card camera-card">
+            <div class="section-header">
+                <h2>Análisis por cámara</h2>
+                <span class="badge">OpenCV multi-rostro</span>
+            </div>
+
+            <div class="camera-layout">
+                <div class="camera-box">
+                    <video id="video" autoplay playsinline muted class="hidden"></video>
+                    <canvas id="overlayCanvas" class="overlay-canvas hidden"></canvas>
+                    <canvas id="canvas" class="hidden"></canvas>
+                    <p id="cameraPlaceholder">La cámara aparecerá aquí.</p>
+                </div>
+
+                <div class="camera-info">
+                    <p>
+                        Recomendaciones: mira al frente, usa buena iluminación y deja los rostros visibles.
+                        El sistema analiza máximo 2 personas por captura.
+                    </p>
+                    <div class="legend">
+                        <span><i class="dot dot-red"></i> Persona 1</span>
+                        <span><i class="dot dot-blue"></i> Persona 2</span>
+                    </div>
+                    <p id="liveStatus" class="live-status">Cámara apagada.</p>
+                    <div class="actions vertical-actions">
+                        <button id="startCameraBtn">Activar cámara</button>
+                        <button id="captureBtn" class="secondary" disabled>Capturar y analizar</button>
+                        <button id="stopCameraBtn" class="danger" disabled>Apagar cámara</button>
+                    </div>
+                </div>
+            </div>
+
+            <p id="errorBox" class="error hidden"></p>
+        </section>
+
+        <section id="resultCard" class="card result-card hidden">
+            <h2>Resultado</h2>
+            <div class="result-grid">
+                <div>
+                    <span class="label">Resumen</span>
+                    <strong id="sentimentValue">-</strong>
+                </div>
+                <div>
+                    <span class="label">Confianza promedio</span>
+                    <strong id="confidenceValue">-</strong>
+                </div>
+            </div>
+            <p id="explanationValue" class="explanation"></p>
+            <div id="peopleResults" class="people-results"></div>
+        </section>
+
+        <section class="card analyzer-card optional-text-card">
+            <div class="section-header">
+                <h2>Análisis por texto opcional</h2>
+                <span class="badge muted">Respaldo</span>
+            </div>
+            <label for="textInput">Mensaje a analizar</label>
+            <textarea id="textInput" placeholder="Ejemplo: Hoy me siento cansado, pero sigo intentando."></textarea>
+
+            <div class="actions">
+                <button id="analyzeBtn">Analizar texto</button>
+                <button id="clearBtn" class="secondary">Limpiar historial</button>
+            </div>
+        </section>
+
+        <section class="card history-card">
+            <div class="section-header">
+                <h2>Historial local</h2>
+                <button id="reloadBtn" class="link-button">Actualizar</button>
+            </div>
+            <div id="historyList" class="history-list"></div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

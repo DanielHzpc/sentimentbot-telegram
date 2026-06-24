@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: sentimentbot-telegram
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DATABASE_NAME
+        value: sentimentbot.db
+      - key: HISTORY_LIMIT
+        value: 10
+      - key: MIN_TEXT_LENGTH
+        value: 3
+      - key: USE_AI_SENTIMENT
+        value: false
+      - key: ANALYSIS_MODE
+        value: rules_only
+      - key: PRELOAD_AI_MODEL
+        value: false
+      - key: FACE_ANALYSIS_MODE
+        value: opencv_multi_face

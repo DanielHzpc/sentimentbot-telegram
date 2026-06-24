@@ -1,0 +1,8 @@
+# Opcional: solo si quieres análisis de texto con Transformers.
+# Recomendado usar Python 3.10, 3.11 o 3.12 para mayor compatibilidad.
+transformers>=4.40.0
+torch>=2.2.0
+
+# DeepFace NO se incluye por defecto porque depende de TensorFlow
+# y en Python 3.14 puede no existir una versión compatible.
+# deepface>=0.0.92
